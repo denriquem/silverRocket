@@ -1,21 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const postsRoute = require("./routes/posts");
+
 const app = express();
 
 const pword = process.env.PWORD;
 
 // Middlewares
-app.use("/posts", () => {
-	console.log("this is a middleware running");
-});
+app.use("/posts", postsRoute);
 
 // Routes
 app.get("/", (req, res) => {
 	res.send("We're home");
-});
-
-app.get("/posts", (req, res) => {
-	res.send("We're on posts");
 });
 
 // Connect to DB
