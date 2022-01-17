@@ -1,17 +1,32 @@
-const http = require("http");
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
 
-const server = http.createServer((req, res) => {
-	if (req.url === "/") {
-		res.write("Hello World");
-		res.end();
-	}
+const pword = process.env.PWORD;
 
-	if (req.url === "/api/courses") {
-		res.write(JSON.stringify([1, 2, 3]));
-		res.end();
-	}
+// Middlewares
+app.use("/posts", () => {
+	console.log("this is a middleware running");
 });
 
-server.listen(3000);
+// Routes
+app.get("/", (req, res) => {
+	res.send("We're home");
+});
 
-console.log("listening on port 3000");
+app.get("/posts", (req, res) => {
+	res.send("We're on posts");
+});
+
+// Connect to DB
+mongoose.connect(
+	`mongodb+srv://shlomoLiquid:${pword}@thebackend.laolw.mongodb.net/theBackEnd?retryWrites=true&w=majority`,
+	() => {
+		console.log("connected to DB");
+	}
+);
+
+//PORT
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`listening on port ${port}`));
