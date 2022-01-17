@@ -1,3 +1,4 @@
+require("dotenv/config");
 const express = require("express");
 const mongoose = require("mongoose");
 const postsRoute = require("./routes/posts");
@@ -17,12 +18,16 @@ app.get("/", (req, res) => {
 });
 
 // Connect to DB
-mongoose.connect(
-	`mongodb+srv://shlomoLiquid:${pword}@thebackend.laolw.mongodb.net/theBackEnd?retryWrites=true&w=majority`,
-	() => {
-		console.log("connected to DB");
-	}
-);
+mongoose
+	.connect(
+		`mongodb+srv://shlomoLiquid:${pword}@thebackend.laolw.mongodb.net/theBackEnd?retryWrites=true&w=majority`,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
+	)
+	.then(() => console.log("db connected"))
+	.catch((err) => console.log(err));
 
 //PORT
 const port = process.env.PORT || 3000;

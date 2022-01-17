@@ -10,8 +10,15 @@ router.get("/specific", (req, res) => {
 	res.send("specific post");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
 	console.log(req.body);
+	const post = new Post(req.body);
+	try {
+		const savedPost = await post.save();
+		res.json(savedPost);
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 module.exports = router;
