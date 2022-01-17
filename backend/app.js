@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const postsRoute = require("./routes/posts");
-
+const bodyParser = require("body-parser");
 const app = express();
 
 const pword = process.env.PWORD;
+
+app.use(bodyParser.json());
 
 // Middlewares
 app.use("/posts", postsRoute);
