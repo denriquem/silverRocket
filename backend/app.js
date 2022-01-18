@@ -2,6 +2,7 @@ require("dotenv/config");
 const express = require("express");
 const mongoose = require("mongoose");
 const postsRoute = require("./routes/posts");
+const authRoute = require("./routes/auth");
 const bodyParser = require("body-parser");
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 
 // Middlewares
 app.use("/posts", postsRoute);
+app.use("/user", authRoute);
 
 // Routes
 app.get("/", (req, res) => {
