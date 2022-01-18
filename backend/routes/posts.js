@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 
-router.get("/", (req, res) => {
-	res.send("We're on posts");
+router.get("/", async (req, res) => {
+	try {
+		const posts = await Post.find();
+		res.json(posts);
+	} catch (err) {
+		res.json({ message: err });
+	}
 });
 
 router.get("/specific", (req, res) => {
@@ -17,7 +22,7 @@ router.post("/", async (req, res) => {
 		const savedPost = await post.save();
 		res.json(savedPost);
 	} catch (err) {
-		console.log(err);
+		res.json(err);
 	}
 });
 
