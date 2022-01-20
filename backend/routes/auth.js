@@ -4,7 +4,6 @@ const { registerValidation, loginValidation } = require("../validation");
 const bcrypt = require("bcrypt");
 
 const router = express.Router();
-const saltRounds = 10;
 
 router.post("/register", async (req, res) => {
 	//vaidate data before making user
@@ -19,10 +18,8 @@ router.post("/register", async (req, res) => {
 		return res.status(400).send("email already exists");
 	}
 
-	let hashedPword;
-	bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-		hashedPword = hash;
-	});
+	const salt = await bcrypt.genSalt(10);
+	const hashedPword = await bcrypt.hash(req.body.password, salt);
 
 	const user = new User({
 		name: req.body.name,
