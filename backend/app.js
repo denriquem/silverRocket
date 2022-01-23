@@ -4,11 +4,14 @@ const mongoose = require("mongoose");
 const postsRoute = require("./routes/posts");
 const authRoute = require("./routes/auth");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
 const app = express();
 
 const pword = process.env.PWORD;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Middlewares
 app.use("/posts", postsRoute);
