@@ -1,7 +1,6 @@
-import React from "react";
 import classes from "./PostItem.module.css";
 
-const PostItem = (props) => {
+const PostItem = (props: any) => {
 	return (
 		<section className={classes.postBox}>
 			<h2>{props.data.body}</h2>

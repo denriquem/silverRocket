@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PostItem from "./PostItem";
 import axios from "axios";
 
 const Posts = () => {
@@ -15,7 +16,11 @@ const Posts = () => {
 		getPosts();
 	}, []);
 
-	return <div></div>;
+	const postList: any[] = posts.map((post, index) => {
+		return <PostItem data={post} key={index} />;
+	});
+
+	return <div>{postList}</div>;
 };
 
 export default Posts;

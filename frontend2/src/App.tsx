@@ -1,10 +1,13 @@
 import Header from "./components/Header";
+import Posts from "./components/Posts";
+import { Fragment } from "react";
 
 const App = () => {
 	return (
-		<div>
+		<Fragment>
 			<Header />
-		</div>
+			<Posts />
+		</Fragment>
 	);
 };
 
